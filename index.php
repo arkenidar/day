@@ -4,9 +4,10 @@
 <title>day</title>
 <meta name="viewport" content="width=device-width">
 <meta charset="UTF-8">
-<script src="jquery.js"></script>
 </head>
 <body>
+<!--
+<script src="jquery.js"></script>
 <script>function url_get(){
 var url=$("#url").val()
 //alert(url)
@@ -20,7 +21,8 @@ async: true,
 success: function(response) {
 response=JSON.parse(response);
 console.log(response);
-alert(response.title);
+alert(response.title);//testing
+//location.reload(); //trick
 var text=response.title;
 var href=response.url;
 if(!href.startsWith("http")) href="https://"+href;
@@ -34,8 +36,12 @@ console.log(e)
 });
 }
 }</script>
-<input type="url" id="url"><button onclick="url_get()">URL</button>
-<div id="out"></div>
+-->
+<form action="get_external_content.php">
+<input type="url" name="url" id="url"><!--<button onclick="url_get()">URL</button>-->
+<input type="submit">
+</form>
+<div id="out"><?=file_get_contents("out.html")?></div>
 <script>
 //$(()=>alert("now jquery"))
 //alert("now script")

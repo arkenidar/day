@@ -16,6 +16,18 @@ $html = file_get_contents_curl($url);
 preg_match('/<title>(.*)<\/title>/',$html,$matches);
 $title = $matches[1];
 
+function out_link($url,$title){
+$out=file_get_contents("out.html");
+$url=htmlspecialchars($url);
+$title=htmlspecialchars($title);
+$add="<a href='$url'>$title</a>";
+file_put_contents("out.html","$add<br>\n$out");
+}
+
+out_link($url,$title);
+//echo file_get_contents("out.html");
+header("Location: ."); // redirect
+
 echo json_encode(array(
     "url" => $url,
     "title" => $title));
