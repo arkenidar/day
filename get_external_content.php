@@ -26,7 +26,9 @@ $out=file_get_contents("out.html");
 function out_link($url,$title){
 $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
-$new="<a href='$url'>$title</a><br>";
+date_default_timezone_set('Europe/Rome');
+$timestamp=date("Y-m-d|H-i-s",time());
+$new="<a href='$url'>$title</a> [$timestamp]<br>";
 return $new;
 }
 
