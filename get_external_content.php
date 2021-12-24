@@ -21,18 +21,42 @@ function url_title($url){
     return $title;
 }
 
-function out_link($url,$title){
 $out=file_get_contents("out.html");
+
+function out_link($url,$title){
 $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
-$add="<a href='$url'>$title</a>";
-file_put_contents("out.html","$add<br>\n$out");
+$new="<a href='$url'>$title</a><br>";
+return $new;
 }
 
-$title = url_title($url);
+function out_youtube($url){
 
-out_link($url,$title);
+parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+$video_id=$my_array_of_vars['v'];
+
+$video_id=htmlspecialchars($video_id);
+$new='<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_id.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+
+return "$new<br>\n";
+}
+
+function str_starts($string,$query){ // not PHP8
+    return substr($string, 0, strlen($query)) === $query;
+}
+
+$new="";
+if(str_starts($url,"https://www.youtube.com")){
+    $new .= out_youtube($url);
+}
+
+$title_out = url_title($url);
+$new .= out_link($url,$title_out);    
+
+file_put_contents("out.html","$new\n$out");
 //echo file_get_contents("out.html");
+///echo url_title($url);
+///echo $new;
 header("Location: ."); // redirect
 
 echo json_encode(array(
