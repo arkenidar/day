@@ -1,4 +1,7 @@
 <?php
+
+$url = $_REQUEST["url"];
+
 function file_get_contents_curl($url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -10,11 +13,13 @@ function file_get_contents_curl($url){
     return $data;
 }
 
-$url = $_REQUEST["url"];
-$html = file_get_contents_curl($url);
+function url_title($url){
+    $html = file_get_contents_curl($url);
 
-preg_match('/<title>(.*)<\/title>/',$html,$matches);
-$title = $matches[1];
+    preg_match('/<title>(.*)<\/title>/',$html,$matches);
+    $title = $matches[1];
+    return $title;
+}
 
 function out_link($url,$title){
 $out=file_get_contents("out.html");
@@ -23,6 +28,8 @@ $title=htmlspecialchars($title);
 $add="<a href='$url'>$title</a>";
 file_put_contents("out.html","$add<br>\n$out");
 }
+
+$title = url_title($url);
 
 out_link($url,$title);
 //echo file_get_contents("out.html");
