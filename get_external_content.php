@@ -17,7 +17,8 @@ function url_title($url){
     $html = file_get_contents_curl($url);
 
     preg_match('/<title>(.*)<\/title>/',$html,$matches);
-    $title = $matches[1];
+    $title = (string)@$matches[1];
+    if($title=="") $title=$url." (NO-TITLE)";
     return $title;
 }
 
@@ -28,7 +29,7 @@ $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<a href='$url'>$title</a> [$timestamp]<br>";
+$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>";
 return $new;
 }
 
@@ -41,14 +42,14 @@ $video_id=$my_array_of_vars['v'];
 $video_id=htmlspecialchars($video_id);
 $new='<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$video_id.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
 
-return "$new<br>\n";
+return $new;
 }
 
 function str_starts($string,$query){ // not PHP8
     return substr($string, 0, strlen($query)) === $query;
 }
 
-$new="";
+$new="<div class='entry'>";
 
 // link
 $title_out = url_title($url);
@@ -59,7 +60,10 @@ if(str_starts($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
 
-file_put_contents("out.html","$new\n$out");
+$new.="</div>\n";
+
+// prepend text
+file_put_contents("out.html",$new.$out);
 //echo file_get_contents("out.html");
 ///echo url_title($url);
 ///echo $new;
