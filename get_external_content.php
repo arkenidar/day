@@ -35,6 +35,7 @@ return $new;
 function out_youtube($url){
 
 parse_str( parse_url( $url, PHP_URL_QUERY ), $my_array_of_vars );
+if(array_key_exists('v',$my_array_of_vars)==false) return "";
 $video_id=$my_array_of_vars['v'];
 
 $video_id=htmlspecialchars($video_id);
