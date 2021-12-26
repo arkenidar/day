@@ -64,11 +64,5 @@ $new.="</div>\n";
 
 // prepend text
 file_put_contents("out.html",$new.$out);
-//echo file_get_contents("out.html");
-///echo url_title($url);
-///echo $new;
-header("Location: ."); // redirect
 
-echo json_encode(array(
-    "url" => $url,
-    "title" => $title));
+header("Location: ."); // redirect
