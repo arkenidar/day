@@ -22,8 +22,6 @@ function url_title($url){
     return $title;
 }
 
-$out=file_get_contents("out.html");
-
 function out_link($url,$title){
 $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
@@ -63,6 +61,7 @@ if(str_starts($url,"https://www.youtube.com")){
 $new.="</div>\n";
 
 // prepend text
-file_put_contents("out.html",$new.$out);
+$out_file="out.html";
+file_put_contents($out_file,$new.file_get_contents($out_file));
 
 header("Location: ."); // redirect
