@@ -49,12 +49,15 @@ function str_starts($string,$query){ // not PHP8
 }
 
 $new="";
+
+// link
+$title_out = url_title($url);
+$new .= out_link($url,$title_out);    
+
+// youtube.com video embed / preview
 if(str_starts($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
-
-$title_out = url_title($url);
-$new .= out_link($url,$title_out);    
 
 file_put_contents("out.html","$new\n$out");
 //echo file_get_contents("out.html");
