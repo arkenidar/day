@@ -16,6 +16,7 @@
 <link href="css/entry.css" rel="stylesheet">
 <div id="out"></div>
 <script>
+$.ajaxSetup({cache:false});
 $("#out").load("out.html");
 </script>
 
