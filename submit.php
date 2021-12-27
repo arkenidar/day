@@ -2,18 +2,19 @@
 
 $url = $_REQUEST["url"];
 
-function file_get_contents_curl($url){
+function file_get_contents_curl(&$url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 0);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
     $data = curl_exec($ch);
+    $url = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
     curl_close($ch);
     return $data;
 }
 
-function url_title($url){
+function url_title(&$url){
     $html = file_get_contents_curl($url);
 
     preg_match('/<title>(.*)<\/title>/',$html,$matches);
