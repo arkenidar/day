@@ -1,0 +1,22 @@
+
+/* formatting */
+.entry {
+  line-break: anywhere;
+}
+.entry > a:before {
+  content: "{";
+}
+.entry > a:after {
+  content: "}";
+}
+
+/* look */
+.entry > a {
+  color: black;
+  text-decoration: none;
+}
+
+/* spacing */
+.entry {
+  margin-bottom: 1em;
+}
