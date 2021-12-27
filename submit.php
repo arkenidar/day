@@ -60,8 +60,8 @@ if(str_starts($url,"https://www.youtube.com")){
 
 $new.="</div>\n";
 
-// prepend text
 $out_file="out.html";
-file_put_contents($out_file,$new.file_get_contents($out_file));
+$previous=(string)@file_get_contents($out_file);
+file_put_contents($out_file,$new.$previous); // prepend text
 
 header("Location: ."); // redirect
