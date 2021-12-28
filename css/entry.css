@@ -3,20 +3,20 @@
 .entry {
   line-break: anywhere;
 }
-.entry > a:before {
-  content: "{";
-}
-.entry > a:after {
-  content: "}";
-}
-
-/* look */
-.entry > a {
-  color: black;
-  text-decoration: none;
-}
 
 /* spacing */
 .entry {
   margin-bottom: 1em;
+}
+
+/* old standards fixes */
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+/* iframe size */
+iframe {
+  width: 95vw;
+  height: 55vw;
 }

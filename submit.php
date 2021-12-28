@@ -28,7 +28,7 @@ $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>";
+$new="<div><a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a></div>";
 return $new;
 }
 
