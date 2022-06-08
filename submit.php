@@ -1,6 +1,9 @@
 <?php
+// https://github.com/arkenidar/tools for requiring login
+session_start(); $_SESSION["loggedin"] or die("error: you aren't authorized!\n");
 
 $url = $_REQUEST["url"];
+//$url="https://www.youtube.com/watch?v=ADzC1-DXfb4";
 
 function file_get_contents_curl(&$url){
     $ch = curl_init();
@@ -52,7 +55,7 @@ $new="<div class='entry'>";
 
 // link
 $title_out = url_title($url);
-$new .= out_link($url,$title_out);    
+$new .= out_link($url,$title_out);
 
 // youtube.com video embed / preview
 if(str_starts($url,"https://www.youtube.com")){
@@ -63,6 +66,6 @@ $new.="</div>\n";
 
 $out_file="out.html";
 $previous=(string)@file_get_contents($out_file);
-file_put_contents($out_file,$new.$previous); // prepend text
+if(false===file_put_contents($out_file,$new.$previous)) die("can't write file"); // prepend text
 
 header("Location: ."); // redirect
