@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<script src="jquery.js"></script>
 
 <form action="submit.php">
 <input type="url" name="url">
@@ -14,11 +13,8 @@
 </form>
 
 <link href="css/entry.css" rel="stylesheet">
-<div id="out"></div>
-<script>
-$.ajaxSetup({cache:false});
-$("#out").load("out.html");
-</script>
-
+<div id="out">
+<?php include("out.html"); ?>
+</div>
 </body>
 </html>
