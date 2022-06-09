@@ -62,6 +62,19 @@ if(str_starts($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
 
+// page by URL
+if(filter_var($url, FILTER_VALIDATE_URL) && str_ends_with($url,".page.txt") && str_starts_with($url,"https://arkenidar.com/app/pages/")){
+    ob_start(); // HTML Output Buffering
+?>
+<script src="js/page.js"></script>
+<script>page_load("<?= $url ?>")</script>
+<?php
+
+    $text = ob_get_contents(); ob_end_clean();
+
+    $new.=$text."\n";
+} // if
+
 $new.="</div>\n";
 
 $out_file="out.html";
