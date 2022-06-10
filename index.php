@@ -13,8 +13,10 @@
 </form>
 
 <link href="css/entry.css" rel="stylesheet">
+
 <div id="out">
 <?php include( file_get_contents("latest.txt") ); ?>
 </div>
+
 </body>
 </html>

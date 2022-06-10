@@ -1,14 +1,14 @@
 // page by URL
-function page_load(url){
+function page_load(){
   var scripts = document.getElementsByTagName("script")
   var thisScriptTag = scripts[ scripts.length - 1 ]
-
+  var url = thisScriptTag.parentNode.querySelector("a[data-timestamp]").href
   addPage(url,thisScriptTag)
 }
 
 function addPage(url,thisScriptTag){
     var html="<pre style='white-space: pre-wrap;'>"+
-    " preview: "+getResponseText(url)+"</pre>"
+      getResponseText(url)+"</pre>" // preview
     thisScriptTag.insertAdjacentHTML("afterend", html)
 }
 

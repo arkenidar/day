@@ -3,7 +3,7 @@
 session_start(); $_SESSION["loggedin"] or die("error: you aren't authorized!\n");
 
 $url = $_REQUEST["url"];
-//$url="https://www.youtube.com/watch?v=ADzC1-DXfb4";
+filter_var($url, FILTER_VALIDATE_URL) or die("error: invalid URL!\n");
 
 function file_get_contents_curl(&$url){
     $ch = curl_init();
@@ -22,7 +22,7 @@ function url_title(&$url){
 
     preg_match('/<title>(.*)<\/title>/',$html,$matches);
     $title = (string)@$matches[1];
-    if($title=="") $title=$url." (NO-TITLE)";
+    if($title=="") $title=$url; // no title
     return $title;
 }
 
@@ -31,7 +31,7 @@ $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<div><a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a></div>";
+$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a><br>";
 return $new;
 }
 
@@ -47,10 +47,6 @@ $new='<iframe width="560" height="315" src="https://www.youtube.com/embed/'.$vid
 return $new;
 }
 
-function str_starts($string,$query){ // not PHP8
-    return substr($string, 0, strlen($query)) === $query;
-}
-
 $new="<div class='entry'>";
 
 // link
@@ -58,22 +54,13 @@ $title_out = url_title($url);
 $new .= out_link($url,$title_out);
 
 // youtube.com video embed / preview
-if(str_starts($url,"https://www.youtube.com")){
+if(str_starts_with($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
 
 // page by URL
-if(filter_var($url, FILTER_VALIDATE_URL) && str_ends_with($url,".page.txt") && str_starts_with($url,"https://arkenidar.com/app/pages/")){
-    ob_start(); // HTML Output Buffering
-?>
-<script src="js/page.js"></script>
-<script>page_load("<?= $url ?>")</script>
-<?php
-
-    $text = ob_get_contents(); ob_end_clean();
-
-    $new.=$text."\n";
-} // if
+if(filter_var($url, FILTER_VALIDATE_URL) && str_ends_with($url,".page.txt") && str_starts_with($url,"https://arkenidar.com/app/pages/"))
+    $new .= '<script src="js/page.js"></script><script>page_load()</script>';
 
 $new.="</div>\n";
 
