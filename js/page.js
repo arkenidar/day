@@ -3,7 +3,7 @@ function page_load(){
   var scripts = document.getElementsByTagName("script")
   var thisScriptTag = scripts[ scripts.length - 1 ]
   var url = thisScriptTag.parentNode.querySelector("a[data-timestamp]").href
-  addPage(url,thisScriptTag)
+  if(url.endsWith(".txt")) addPage(url,thisScriptTag)
 }
 
 function addPage(url,thisScriptTag){
@@ -20,3 +20,4 @@ function getResponseText(url){
   xhr.send()
   return text
 }
+

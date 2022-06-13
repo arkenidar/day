@@ -58,11 +58,9 @@ if(str_starts_with($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
 
-// page by URL
-if(filter_var($url, FILTER_VALIDATE_URL) && str_ends_with($url,".page.txt") && str_starts_with($url,"https://arkenidar.com/app/pages/"))
-    $new .= '<script src="js/page.js"></script><script>page_load()</script>';
+$new .= '<script src="js/page.js"></script><script>page_load()</script>';
 
-$new.="</div>\n";
+$new .= "</div>\n";
 
 $out_file="out.html";
 $previous=(string)@file_get_contents($out_file);
