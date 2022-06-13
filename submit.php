@@ -1,6 +1,6 @@
 <?php
-// https://github.com/arkenidar/tools for requiring login
-session_start(); $_SESSION["loggedin"] or die("error: you aren't authorized!\n");
+
+require_once("login.php"); is_logged() or die("error: you aren't authorized!\n");
 
 $url = $_REQUEST["url"];
 filter_var($url, FILTER_VALIDATE_URL) or die("error: invalid URL!\n");

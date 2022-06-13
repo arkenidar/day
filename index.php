@@ -7,9 +7,14 @@
 </head>
 <body>
 
-<form action="submit.php">
-<input type="url" name="url">
+<form action="submit.php" method="POST">
+
+<input type="url" name="url" placeholder="URL">
 <input type="submit">
+
+<input type="email" name="email" placeholder="e-mail address">
+<input type="password" name="password" placeholder="pass-word">
+
 </form>
 
 <link href="css/entry.css" rel="stylesheet">
