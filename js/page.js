@@ -4,6 +4,12 @@ function page_load(){
   var thisScriptTag = scripts[ scripts.length - 1 ]
   var url = thisScriptTag.parentNode.querySelector("a[data-timestamp]").href
   if(url.endsWith(".txt")) addPage(url,thisScriptTag)
+  else if(url.endsWith(".png")) addImage(url,thisScriptTag)
+}
+
+function addImage(url,thisScriptTag){
+  var html='<img src="'+url+'">' // preview
+  thisScriptTag.insertAdjacentHTML("afterend", html)
 }
 
 function addPage(url,thisScriptTag){
