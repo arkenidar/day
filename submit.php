@@ -62,7 +62,8 @@ $new .= '<script src="js/page.js"></script><script>page_load()</script>';
 
 $new .= "</div>\n";
 
-$out_file="out.html";
+//$out_file="out.html";
+$out_file=file_get_contents("latest.txt");
 $previous=(string)@file_get_contents($out_file);
 if(false===file_put_contents($out_file,$new.$previous)) die("can't write file"); // prepend text
 
