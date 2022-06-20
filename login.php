@@ -1,6 +1,22 @@
-<?php
-
-function is_logged(){
-    require("secrets.php");
-    return $_REQUEST["password"] === $passphrase ;
+<?php session_start();
+include "secrets.php";
+if(!isset($secret_password)) die("error: missing a secrets.php file!");
+if($_REQUEST["submit"]=="login" && $_REQUEST["password"]==$secret_password){
+$_SESSION["loggedin"]=true;
 }
+if($_REQUEST["submit"]=="logout"){
+$_SESSION["loggedin"]=false;
+}
+?><!doctype html>
+<title>login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+Status: <?=$_SESSION["loggedin"]?"logged in":"logged out"?>
+<form action="" method="post">
+
+<input type="email" name="email" placeholder="e-mail address">
+<input type="password" name="password" placeholder="pass-word"> <br>
+
+<input type="submit" value="login" name="submit">
+<input type="submit" value="logout" name="submit">
+</form>

@@ -1,6 +1,6 @@
 <?php
 
-require_once("login.php"); is_logged() or die("error: you aren't authorized!\n");
+session_start(); $_SESSION["loggedin"] or die("error: you aren't authorized!\n");
 
 $url = $_REQUEST["url"];
 filter_var($url, FILTER_VALIDATE_URL) or die("error: invalid URL!\n");
@@ -31,7 +31,7 @@ $url=htmlspecialchars($url);
 $title=htmlspecialchars($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a><br>";
+$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>&nbsp;";
 return $new;
 }
 
@@ -57,8 +57,6 @@ $new .= out_link($url,$title_out);
 if(str_starts_with($url,"https://www.youtube.com")){
     $new .= out_youtube($url);
 }
-
-$new .= '<script src="js/page.js"></script><script>page_load()</script>';
 
 $new .= "</div>\n";
 

@@ -20,3 +20,5 @@ iframe {
   width: 95vw;
   height: 55vw;
 }
+
+pre { white-space: pre-wrap; }
