@@ -19,14 +19,10 @@ if(false=== file_put_contents($filename,$_REQUEST['file_content']) ) die("can't 
 
 ?>
 
-<form method="post" onsubmit="sync_to_send()">
+<form method="post">
 <input type="submit" value="save"> <input value="<?=htmlentities($filename)?>" id="filename">
 <button onclick="setTimeout(()=>location='?filename='+filename.value)">open</button> <br>
 
-<div contenteditable id="file_content" style="white-space: pre; overflow: scroll; border: 1px solid black; min-height: 100px;"><?=htmlentities(file_get_contents($filename))?></div>
-<textarea hidden name="file_content" id="textarea_to_send"></textarea>
-<script>function sync_to_send(){
-textarea_to_send.textContent=file_content.innerText
-}</script>
+<textarea name="file_content" rows=50 cols=50><?=htmlentities(file_get_contents($filename))?></textarea>
 
 </form>
