@@ -26,9 +26,15 @@ function url_title(&$url){
     return $title;
 }
 
+function replace_lt_gt($text){
+    $text=str_replace("<","&lt;",$text);
+    $text=str_replace(">","&gt;",$text);
+    return $text;
+}
+
 function out_link($url,$title){
-$url=htmlspecialchars($url);
-$title=htmlspecialchars($title);
+$url=replace_lt_gt($url);
+$title=replace_lt_gt($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
 $new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>&nbsp;";
@@ -54,7 +60,7 @@ $title_out = url_title($url);
 $new .= out_link($url,$title_out);
 
 // youtube.com video embed / preview
-if(str_starts_with($url,"https://www.youtube.com")){
+if(false !== strpos($url,"youtube.com")){
     $new .= out_youtube($url);
 }
 
