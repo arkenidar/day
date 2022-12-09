@@ -12,9 +12,11 @@ function addImage(url,entry){
   entry.insertAdjacentHTML("beforeend", html)
 }
 
+var showdownConverter = new showdown.Converter()
 function addPage(url,entry){
     var html='<a href="edit.php?URL='+url+'">edit</a>'
-    html += "<pre>"+getResponseText(url)+"</pre>" // preview
+    var preview = showdownConverter.makeHtml( getResponseText(url) )
+    html += "<pre>"+preview+"</pre>"
     entry.insertAdjacentHTML("beforeend", html)
 }
 
