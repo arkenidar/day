@@ -18,8 +18,9 @@ function file_get_contents_curl(&$url){
 }
 
 function url_title(&$url){
-    $html = file_get_contents_curl($url);
-
+    //$html = file_get_contents_curl($url);
+    $html = 'html?';
+    
     preg_match('/<title>(.*)<\/title>/',$html,$matches);
     $title = (string)@$matches[1];
     if($title=="") $title=$url; // no title
