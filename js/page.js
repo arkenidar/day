@@ -5,6 +5,8 @@ function page_load(entry){
   // preview
   if(url.endsWith(".txt")) addPage(url,entry)
   else if(url.endsWith(".png")) addImage(url,entry)
+  else if(url.endsWith(".jpg")) addImage(url,entry)
+  else if(url.endsWith(".jpeg")) addImage(url,entry)
 }
 
 function addImage(url,entry){
@@ -14,7 +16,7 @@ function addImage(url,entry){
 
 var showdownConverter = new showdown.Converter()
 function addPage(url,entry){
-    var html='<a href="edit.php?URL='+url+'">edit</a>'
+    var html='&nbsp;<a href="edit.php?URL='+url+'">edit</a>'
     var preview = showdownConverter.makeHtml( getResponseText(url) )
     html += "<pre>"+preview+"</pre>"
     entry.insertAdjacentHTML("beforeend", html)

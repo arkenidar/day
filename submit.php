@@ -37,7 +37,7 @@ $url=replace_lt_gt($url);
 $title=replace_lt_gt($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>&nbsp;";
+$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>";
 return $new;
 }
 
