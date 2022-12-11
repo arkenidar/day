@@ -16,7 +16,7 @@ function page_load(entry){
 }
 
 function addImage(url,entry){
-  var html='<img src="'+url+'">' // image preview
+  var html='<br><img width="95%" height="55%" src="'+url+'">' // image preview
   entry.insertAdjacentHTML("beforeend", html)
 }
 
@@ -28,7 +28,7 @@ function addVideo(url,entry){
     type = "video/webm"
 
   // video preview
-  var html='<video controls width="95%" height="55%" ><source src="'+url+'" type="'+type+'"></video>'
+  var html='<br><video controls width="95%" height="55%" ><source src="'+url+'" type="'+type+'"></video>'
 
   entry.insertAdjacentHTML("beforeend", html)
 }
