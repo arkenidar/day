@@ -6,7 +6,8 @@ function page_load(entry){
   if(url.endsWith(".txt")) addPage(url,entry)
   else if(url.endsWith(".html")) addPage(url,entry)
   else if(url.endsWith(".htm")) addPage(url,entry)
-  
+  else if(url.endsWith(".md")) addPage(url,entry)
+
   else if(url.endsWith(".png")) addImage(url,entry)
   else if(url.endsWith(".jpg")) addImage(url,entry)
   else if(url.endsWith(".jpeg")) addImage(url,entry)
