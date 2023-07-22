@@ -5,6 +5,7 @@ session_start(); $_SESSION["loggedin"] or die("error: you aren't authorized!\n")
 $url = $_REQUEST["url"];
 filter_var($url, FILTER_VALIDATE_URL) or die("error: invalid URL!\n");
 
+/*
 function file_get_contents_curl(&$url){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -16,7 +17,7 @@ function file_get_contents_curl(&$url){
     curl_close($ch);
     return $data;
 }
-
+*/
 function url_title(&$url){
     //$html = file_get_contents_curl($url);
     $html = 'html?';
@@ -33,12 +34,15 @@ function replace_lt_gt($text){
     return $text;
 }
 
+require("lib/lib-fetch.php");
+
 function out_link($url,$title){
 $url=replace_lt_gt($url);
 $title=replace_lt_gt($title);
 date_default_timezone_set('Europe/Rome');
 $timestamp=date("Y-m-d|H-i-s",time());
-$new="<a href='$url' data-timestamp='$timestamp'>($timestamp) $title</a>";
+$htmlsafe_url = htmlspecialchars($url, ENT_QUOTES | ENT_HTML5); // safer, more robust too
+$new="<a href='$htmlsafe_url' data-timestamp='$timestamp'>($timestamp) $title</a>";
 return $new;
 }
 
@@ -57,7 +61,8 @@ return $new;
 $new="<div class='entry'>";
 
 // link
-$title_out = url_title($url);
+/// $title_out = url_title($url);
+$title_out = title_from_URL($url);
 $new .= out_link($url,$title_out);
 
 // youtube.com video embed / preview
