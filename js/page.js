@@ -52,6 +52,8 @@ function addPage(url,entry){
     // [entry] entries can now contain HTML+JS
 
     //html += "<pre>"+preview+"</pre>" // page preview // this changes HTML formatting
+    // case exception: if text file then wrap it with <pre> tags 
+    if(url.endsWith(".txt")) html += "<pre>"+preview+"</pre>"; else
     html += preview // page preview
     
     //entry.insertAdjacentHTML("beforeend", html) // this doesn't properly handle e.g. <script> tags
