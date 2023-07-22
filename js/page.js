@@ -34,12 +34,28 @@ function addVideo(url,entry){
   entry.insertAdjacentHTML("beforeend", html)
 }
 
+// this does handle <script> tags etc.
+// source: https://arkenidar.com/web/editor.html
+function nodeContentFromCode(code, node) {
+  var range = document.createRange()
+  range.selectNode(document.body)
+  var documentFragment = range.createContextualFragment(code)
+  node.innerHTML = ""
+  node.appendChild(documentFragment)
+}
+
 var showdownConverter = new showdown.Converter()
 function addPage(url,entry){
-    var html='&nbsp;<a href="edit.php?URL='+url+'">edit</a>'
+    var html='&nbsp;<a href="edit.php?URL='+url+'">modify</a>'
     var preview = showdownConverter.makeHtml( getResponseText(url) )
-    html += "<pre>"+preview+"</pre>" // page preview
-    entry.insertAdjacentHTML("beforeend", html)
+    
+    // [entry] entries can now contain HTML+JS
+
+    //html += "<pre>"+preview+"</pre>" // page preview // this changes HTML formatting
+    html += preview // page preview
+    
+    //entry.insertAdjacentHTML("beforeend", html) // this doesn't properly handle e.g. <script> tags
+    nodeContentFromCode(html, entry) // this does handle <script> tags etc.
 }
 
 function getResponseText(url){
