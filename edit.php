@@ -18,6 +18,8 @@ if(isset($_REQUEST['file_content']))
 if(false=== file_put_contents($filename,$_REQUEST['file_content']) ) die("can't write file");
 
 ?>
+<a href=".">go to main page</a>
+<br>
 
 <form method="post">
 <input type="submit" value="save"> <input value="<?=htmlentities($filename)?>" id="filename">
