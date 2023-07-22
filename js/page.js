@@ -47,7 +47,10 @@ function nodeContentFromCode(code, node) {
 var showdownConverter = new showdown.Converter()
 function addPage(url,entry){
     var html='&nbsp;<a href="edit.php?URL='+url+'">modify</a>'
-    var preview = showdownConverter.makeHtml( getResponseText(url) )
+    var preview = getResponseText(url)
+
+    // (optional) MarkDown (.md) formatting to HTML by use of "show-down" converter ("showdown" is a code-library that provides this feature)
+    if(url.endsWith(".md")) preview = showdownConverter.makeHtml( preview )
     
     // [entry] entries can now contain HTML+JS
 
