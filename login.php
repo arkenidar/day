@@ -20,7 +20,9 @@ $_SESSION["loggedin"]=false;
 <form action="" method="post">
 Condition: <?=$_SESSION["loggedin"]?"access enabled":"access not enabled"?>
 <input type="submit" value="exit" name="submit-exit"><br>
+</form>
 <hr>
+<form action="" method="post">
 <input type="email" name="email" placeholder="e-mail address">
 <input type="password" name="password" placeholder="pass-word">
 <input type="submit" value="enter" name="submit-enter">
