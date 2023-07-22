@@ -9,6 +9,11 @@
   margin-bottom: 1em;
 }
 
+/* visual separation of entries */
+.entry {
+  border-top: 1px solid black;
+}
+
 /* old standards fixes */
 html, body {
   padding: 0;
