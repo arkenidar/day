@@ -73,5 +73,7 @@ function getResponseText(url){
   return text
 }
 
-document.querySelector("#out").innerHTML = getResponseText( getResponseText("latest.txt") )
+//document.querySelector("#out").innerHTML = getResponseText( getResponseText("latest.txt") )
+nodeContentFromCode(getResponseText( getResponseText("latest.txt") ), document.querySelector("#out"))
+
 for(var entry of document.querySelectorAll(".entry")) page_load( entry )
