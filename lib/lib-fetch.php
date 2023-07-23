@@ -16,7 +16,7 @@ function title_from_URL($url){
     $html = file_get_contents_curl($url);
 
     function title_from_HTML($html, $no_title_fallback){
-        preg_match('/<title>(.*)<\/title>/',$html,$matches);
+        preg_match('/<title>(.*?)<\/title>/',$html,$matches);
         if(!isset($matches[1])) $title = $no_title_fallback; else
         $title = $matches[1];
         return $title;
