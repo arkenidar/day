@@ -65,10 +65,12 @@ $new="<div class='entry'>";
 $title_out = title_from_URL($url);
 $new .= out_link($url,$title_out);
 
+/*
 // youtube.com video embed / preview
 if(false !== strpos($url,"youtube.com")){
     $new .= out_youtube($url);
 }
+*/
 
 $new .= "</div>\n";
 
