@@ -1,9 +1,3 @@
-<div class='entry'><a href='https://www.youtube.com/watch?v=B1DRpWIPobI' data-timestamp='2023-07-23|11-31-58'>(2023-07-23|11-31-58) What is the Purpose of Meditation? Why Should You Meditate? Meditation Explained | Sadhguru - YouTube</a></div>
-<div class='entry'><a href='https://www.youtube.com/watch?v=Hzi3PDz1AWU' data-timestamp='2023-07-23|10-11-54'>(2023-07-23|10-11-54) &#39;How to Meditate&#39; for Beginners | Sadhguru - YouTube</a></div>
-<link href="css/entry.css" rel="stylesheet">
-
-<script>
-
 function youtube_html_from_video_id(video_id){
     var youtube_html = /*html*/`<iframe width="560" height="315" src="https://www.youtube.com/embed/${video_id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     return youtube_html
@@ -19,9 +13,3 @@ for(var entry of document.querySelectorAll(".entry")){
         entry.insertAdjacentHTML("beforeend",youtube_html)
     }
 }
-
-</script>
-
-<title>entries</title>
-<meta name="viewport" content="width=device-width">
-<meta charset="UTF-8">

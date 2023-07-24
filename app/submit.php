@@ -34,7 +34,7 @@ function replace_lt_gt($text){
     return $text;
 }
 
-require("lib/lib-fetch.php");
+require("../lib/lib-fetch.php");
 
 function out_link($url,$title){
 $url=replace_lt_gt($url);
@@ -75,8 +75,14 @@ if(false !== strpos($url,"youtube.com")){
 $new .= "</div>\n";
 
 //$out_file="out.html";
-$out_file=file_get_contents("latest.txt");
+$out_file=file_get_contents("../days/latest.txt");
 $previous=(string)@file_get_contents($out_file);
-if(false===file_put_contents($out_file,$new.$previous)) die("can't write file"); // prepend text
+
+//$file_contents_to_put = $new.$previous; // prepend text
+$entry_placeholder = "<!-- entry insertion place-holder -->\n";
+$replace = $entry_placeholder.$new;
+$file_contents_to_put = str_replace($entry_placeholder,$replace,$previous);
+
+if(false===file_put_contents($out_file,$file_contents_to_put)) die("can't write file");
 
 header("Location: ."); // redirect

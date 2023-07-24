@@ -1,5 +1,5 @@
 <?php session_start();
-include "secrets.php";
+include "/var/www/secrets/secrets--day-app.php";
 if(!isset($secret_password)) die("error: missing a secrets.php file!");
 if(isset($_REQUEST["submit-enter"]) && $_REQUEST["password"]==$secret_password){
 $_SESSION["loggedin"]=true;
